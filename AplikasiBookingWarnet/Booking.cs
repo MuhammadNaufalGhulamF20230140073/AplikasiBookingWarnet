@@ -72,4 +72,19 @@ namespace booking
                 LoadBookingData();
             }
         }
+        private void btnBatal_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "DELETE FROM booking WHERE bookingID = @bookingID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@bookingID", txtbookingID.Text);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                MessageBox.Show(rowsAffected > 0 ? "Booking dibatalkan." : "Data tidak ditemukan.");
+                ClearForm();
+                LoadBookingData();
+            }
+        }
+
 
