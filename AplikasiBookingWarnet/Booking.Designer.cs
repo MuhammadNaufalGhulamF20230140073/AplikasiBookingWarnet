@@ -30,3 +30,8 @@
         this.txtWaktu.Name = "txtWaktu";
         this.txtWaktu.Size = new System.Drawing.Size(200, 22);
         this.txtWaktu.TabIndex = 0;
+        // txtDeviceID
+        this.txtDeviceID.Location = new System.Drawing.Point(120, 70);
+        this.txtDeviceID.Name = "txtDeviceID";
+        this.txtDeviceID.Size = new System.Drawing.Size(200, 22);
+        this.txtDeviceID.TabIndex = 1;
