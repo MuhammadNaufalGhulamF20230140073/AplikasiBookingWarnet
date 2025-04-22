@@ -35,3 +35,10 @@
         this.txtDeviceID.Name = "txtDeviceID";
         this.txtDeviceID.Size = new System.Drawing.Size(200, 22);
         this.txtDeviceID.TabIndex = 1;
+
+        // txtUsername
+        this.txtUsername.Location = new System.Drawing.Point(120, 40);
+        this.txtUsername.Name = "txtUsername";
+        this.txtUsername.ReadOnly = true;
+        this.txtUsername.Size = new System.Drawing.Size(200, 22);
+        this.txtUsername.TabIndex = 2;
