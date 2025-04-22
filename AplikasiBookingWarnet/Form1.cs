@@ -27,3 +27,12 @@ namespace AplikasiBookingWarnet
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT Username, Pw FROM Akun";
+                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dgvAkun.DataSource = dt;
+                }
