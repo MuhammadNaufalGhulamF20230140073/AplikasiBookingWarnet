@@ -127,3 +127,10 @@ namespace AplikasiBookingWarnet
                             ClearForm();
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                }
+            }
+        
