@@ -103,3 +103,7 @@ namespace AplikasiBookingWarnet
                 MessageBox.Show("Pilih data yang akan dihapus!");
             }
         }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
