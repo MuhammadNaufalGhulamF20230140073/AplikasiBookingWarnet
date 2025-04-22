@@ -76,3 +76,12 @@ namespace AplikasiBookingWarnet
         {
             if (dgvAkun.SelectedRows.Count > 0)
             { string username = dgvAkun.SelectedRows[0].Cells["Username"].Value.ToString();
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        string query = "DELETE FROM Akun WHERE Username = @Username";
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
