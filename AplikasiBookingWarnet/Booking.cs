@@ -93,4 +93,21 @@ namespace booking
             txtbookingID.Text = GenerateBookingID();
         }
 
+        private void LoadBookingData()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT bookingID, deviceID, Waktu FROM booking WHERE Username = @Username";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Username", loggedInUsername);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvBooking.DataSource = dt;
+            }
+        }
+
 
