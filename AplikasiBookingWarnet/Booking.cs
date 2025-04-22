@@ -56,3 +56,20 @@ namespace booking
                 MessageBox.Show("Isi semua data.");
                 return;
             }
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "INSERT INTO booking (bookingID, Username, deviceID, Waktu) VALUES (@bookingID, @Username, @deviceID, @Waktu)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@bookingID", txtbookingID.Text);
+                cmd.Parameters.AddWithValue("@Username", txtUsername.Text);
+                cmd.Parameters.AddWithValue("@deviceID", txtDeviceID.Text);
+                cmd.Parameters.AddWithValue("@Waktu", int.Parse(txtWaktu.Text));
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Booking berhasil!");
+                ClearForm();
+                LoadBookingData();
+            }
+        }
+
