@@ -29,3 +29,23 @@ namespace booking
             txtbookingID.ReadOnly = true;
             LoadBookingData();
         }
+        private string GenerateBookingID()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT TOP 1 bookingID FROM booking ORDER BY bookingID DESC";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                var result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    string lastID = result.ToString();
+                    int num = int.Parse(lastID.Substring(1)) + 1;
+                    return "B" + num.ToString("D4");
+                }
+                else
+                {
+                    return "B0001";
+                }
+            }
+        }
