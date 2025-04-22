@@ -42,3 +42,9 @@
         this.txtUsername.ReadOnly = true;
         this.txtUsername.Size = new System.Drawing.Size(200, 22);
         this.txtUsername.TabIndex = 2;
+        // txtbookingID
+        this.txtbookingID.Location = new System.Drawing.Point(120, 10);
+        this.txtbookingID.Name = "txtbookingID";
+        this.txtbookingID.ReadOnly = true;
+        this.txtbookingID.Size = new System.Drawing.Size(200, 22);
+        this.txtbookingID.TabIndex = 3;
