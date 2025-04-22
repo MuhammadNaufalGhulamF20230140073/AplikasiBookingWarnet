@@ -113,8 +113,17 @@ namespace AplikasiBookingWarnet
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    try
+                     try
                     {
                         conn.Open();
                         string query = "UPDATE Akun SET Pw = @Pw WHERE Username = @Username";
                         using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
+                            cmd.Parameters.AddWithValue("@Pw", txtPw.Text.Trim());
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Data berhasil diperbarui!");
+                            LoadData();
+                            ClearForm();
+                        }
+                    }
