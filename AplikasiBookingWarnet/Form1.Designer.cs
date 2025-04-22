@@ -100,3 +100,14 @@
             this.lblUsername.TabIndex = 7;
             this.lblUsername.Text = "Username";
             // 
+            // 
+            // lblPw
+            // 
+            this.lblPw.AutoSize = true;
+            this.lblPw.BackColor = System.Drawing.Color.GreenYellow;
+            this.lblPw.Location = new System.Drawing.Point(50, 63);
+            this.lblPw.Name = "lblPw";
+            this.lblPw.Size = new System.Drawing.Size(22, 13);
+            this.lblPw.TabIndex = 8;
+            this.lblPw.Text = "Pw";
+            // 
