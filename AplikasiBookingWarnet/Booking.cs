@@ -49,3 +49,10 @@ namespace booking
                 }
             }
         }
+        private void btnPesan_Click(object sender, EventArgs e)
+        {
+            if (txtDeviceID.Text == "" || txtWaktu.Text == "")
+            {
+                MessageBox.Show("Isi semua data.");
+                return;
+            }
