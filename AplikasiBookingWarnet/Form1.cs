@@ -98,3 +98,8 @@ namespace AplikasiBookingWarnet
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("Pilih data yang akan dihapus!");
+            }
+        }
