@@ -9,3 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AplikasiBookingWarnet
+{
+    public partial class Form1 : Form
+    {
+        private string connectionString = "Data Source=DESKTOP-4D54309;Initial Catalog=bookingpc;Integrated Security=True";
