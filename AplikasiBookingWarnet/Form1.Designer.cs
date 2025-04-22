@@ -38,3 +38,14 @@
             this.txtPw.Size = new System.Drawing.Size(150, 20);
             this.txtPw.TabIndex = 1;
             // 
+            // btnTambah
+            // 
+            this.btnTambah.BackColor = System.Drawing.Color.GreenYellow;
+            this.btnTambah.Location = new System.Drawing.Point(330, 30);
+            this.btnTambah.Name = "btnTambah";
+            this.btnTambah.Size = new System.Drawing.Size(75, 23);
+            this.btnTambah.TabIndex = 2;
+            this.btnTambah.Text = "Tambah";
+            this.btnTambah.UseVisualStyleBackColor = false;
+            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
+            // 
