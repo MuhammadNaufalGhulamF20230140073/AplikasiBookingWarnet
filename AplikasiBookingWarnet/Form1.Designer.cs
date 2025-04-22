@@ -82,3 +82,11 @@
             this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // dgvAkun
+            // 
+            this.dgvAkun.Location = new System.Drawing.Point(50, 160);
+            this.dgvAkun.Name = "dgvAkun";
+            this.dgvAkun.Size = new System.Drawing.Size(400, 200);
+            this.dgvAkun.TabIndex = 6;
+            this.dgvAkun.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAkun_CellClick);
+            // 
