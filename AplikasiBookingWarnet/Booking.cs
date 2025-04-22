@@ -21,3 +21,11 @@ namespace booking
             InitializeComponent();
             loggedInUsername = username;
         }
+        private void FormBooking_Load(object sender, EventArgs e)
+        {
+            txtUsername.Text = loggedInUsername;
+            txtUsername.ReadOnly = true;
+            txtbookingID.Text = GenerateBookingID();
+            txtbookingID.ReadOnly = true;
+            LoadBookingData();
+        }
