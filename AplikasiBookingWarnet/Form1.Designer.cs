@@ -31,3 +31,10 @@
             this.txtUsername.Size = new System.Drawing.Size(150, 20);
             this.txtUsername.TabIndex = 0;
             // 
+            // txtPw
+            // 
+            this.txtPw.Location = new System.Drawing.Point(150, 60);
+            this.txtPw.Name = "txtPw";
+            this.txtPw.Size = new System.Drawing.Size(150, 20);
+            this.txtPw.TabIndex = 1;
+            // 
