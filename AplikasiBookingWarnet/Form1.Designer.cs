@@ -23,3 +23,11 @@
             this.lblPw = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAkun)).BeginInit();
             this.SuspendLayout();
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Location = new System.Drawing.Point(150, 30);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(150, 20);
+            this.txtUsername.TabIndex = 0;
+            // 
