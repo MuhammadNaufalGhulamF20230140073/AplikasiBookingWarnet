@@ -107,3 +107,9 @@ namespace AplikasiBookingWarnet
         {
             LoadData();
         }
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvAkun.SelectedRows.Count > 0)
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
