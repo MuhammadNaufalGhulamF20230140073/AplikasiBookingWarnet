@@ -50,3 +50,11 @@ namespace AplikasiBookingWarnet
                 MessageBox.Show("Harap isi semua data");
                 return;
             }
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "INSERT INTO Akun (Username, Pw, Role) VALUES (@Username, @Pw, 'Pengguna')";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
