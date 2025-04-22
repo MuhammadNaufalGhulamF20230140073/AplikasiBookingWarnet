@@ -86,5 +86,11 @@ namespace booking
                 LoadBookingData();
             }
         }
+        private void ClearForm()
+        {
+            txtDeviceID.Clear();
+            txtWaktu.Clear();
+            txtbookingID.Text = GenerateBookingID();
+        }
 
 
