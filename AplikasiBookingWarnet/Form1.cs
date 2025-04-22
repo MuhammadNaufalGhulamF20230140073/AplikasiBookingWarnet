@@ -113,7 +113,7 @@ namespace AplikasiBookingWarnet
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                     try
+                    try
                     {
                         conn.Open();
                         string query = "UPDATE Akun SET Pw = @Pw WHERE Username = @Username";
@@ -133,4 +133,9 @@ namespace AplikasiBookingWarnet
                     }
                 }
             }
+        }
+        private void dgvAkun_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+
         
