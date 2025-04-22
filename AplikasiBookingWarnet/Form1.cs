@@ -75,4 +75,4 @@ namespace AplikasiBookingWarnet
         private void btnHapus_Click(object sender, EventArgs e)
         {
             if (dgvAkun.SelectedRows.Count > 0)
-            {
+            { string username = dgvAkun.SelectedRows[0].Cells["Username"].Value.ToString();
