@@ -58,3 +58,11 @@ namespace AplikasiBookingWarnet
                     string query = "INSERT INTO Akun (Username, Pw, Role) VALUES (@Username, @Pw, 'Pengguna')";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
+                        cmd.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Pw", txtPw.Text.Trim());
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Data berhasil ditambahkan!");
+                        LoadData();
+                        ClearForm();
+                    }
+                }
