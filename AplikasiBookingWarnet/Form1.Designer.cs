@@ -132,3 +132,14 @@
             this.PerformLayout();
 
         }
+        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.TextBox txtPw;
+        private System.Windows.Forms.Button btnTambah;
+        private System.Windows.Forms.Button btnHapus;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.DataGridView dgvAkun;
+        private System.Windows.Forms.Label lblUsername;
+        private System.Windows.Forms.Label lblPw;
+    }
+}
