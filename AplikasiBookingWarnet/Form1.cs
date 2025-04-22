@@ -42,3 +42,11 @@ namespace AplikasiBookingWarnet
                 }
             }
         }
+
+        private void btnTambah_Click(object sender, EventArgs e)
+        {
+            if (txtUsername.Text == "" || txtPw.Text == "")
+            {
+                MessageBox.Show("Harap isi semua data");
+                return;
+            }
