@@ -136,6 +136,13 @@ namespace AplikasiBookingWarnet
         }
         private void dgvAkun_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvAkun.Rows[e.RowIndex];
+                txtUsername.Text = row.Cells["Username"].Value.ToString();
+                txtPw.Text = row.Cells["Pw"].Value.ToString();
+            }
+        }
 
 
         
