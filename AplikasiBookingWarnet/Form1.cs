@@ -85,3 +85,16 @@ namespace AplikasiBookingWarnet
                         string query = "DELETE FROM Akun WHERE Username = @Username";
                         using (SqlCommand cmd = new SqlCommand(query, conn))
                         {
+                            cmd.Parameters.AddWithValue("@Username", username);
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Data berhasil dihapus!");
+                            LoadData();
+                            ClearForm();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                }
+            }
