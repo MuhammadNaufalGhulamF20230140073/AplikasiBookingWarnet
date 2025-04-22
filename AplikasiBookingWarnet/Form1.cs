@@ -36,3 +36,9 @@ namespace AplikasiBookingWarnet
                     da.Fill(dt);
                     dgvAkun.DataSource = dt;
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
