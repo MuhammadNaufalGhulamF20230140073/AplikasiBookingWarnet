@@ -111,3 +111,24 @@
             this.lblPw.TabIndex = 8;
             this.lblPw.Text = "Pw";
             // 
+            // Form1
+            // 
+            this.BackColor = System.Drawing.SystemColors.GrayText;
+            this.ClientSize = new System.Drawing.Size(500, 400);
+            this.Controls.Add(this.dgvAkun);
+            this.Controls.Add(this.txtUsername);
+            this.Controls.Add(this.txtPw);
+            this.Controls.Add(this.btnTambah);
+            this.Controls.Add(this.btnHapus);
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.lblUsername);
+            this.Controls.Add(this.lblPw);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAkun)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
