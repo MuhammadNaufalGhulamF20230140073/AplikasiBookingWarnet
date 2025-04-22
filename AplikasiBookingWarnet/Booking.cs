@@ -11,3 +11,13 @@ using System.Windows.Forms;
 
 namespace booking
 {
+    public partial class FormBooking : Form
+    {
+        private string connectionString = "Data Source=DESKTOP-4D54309;Initial Catalog=bookingpc;Integrated Security=True";
+        private string loggedInUsername;
+
+        public FormBooking(string username)
+        {
+            InitializeComponent();
+            loggedInUsername = username;
+        }
