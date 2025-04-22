@@ -144,5 +144,12 @@ namespace AplikasiBookingWarnet
             }
         }
 
+        private void ClearForm()
+        {
+            txtUsername.Clear();
+            txtPw.Clear();
+            txtUsername.Focus();
+        }
+    }
+}
 
-        
