@@ -48,3 +48,11 @@
         this.txtbookingID.ReadOnly = true;
         this.txtbookingID.Size = new System.Drawing.Size(200, 22);
         this.txtbookingID.TabIndex = 3;
+        // btnPesan
+        this.btnPesan.Location = new System.Drawing.Point(120, 140);
+        this.btnPesan.Name = "btnPesan";
+        this.btnPesan.Size = new System.Drawing.Size(95, 30);
+        this.btnPesan.TabIndex = 4;
+        this.btnPesan.Text = "Pesan";
+        this.btnPesan.UseVisualStyleBackColor = true;
+        this.btnPesan.Click += new System.EventHandler(this.btnPesan_Click);
