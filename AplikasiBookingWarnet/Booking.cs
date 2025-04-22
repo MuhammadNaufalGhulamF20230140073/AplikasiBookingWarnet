@@ -110,4 +110,18 @@ namespace booking
             }
         }
 
+        private void dgvBooking_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvBooking.Rows[e.RowIndex];
+                txtbookingID.Text = row.Cells["bookingID"].Value.ToString();
+                txtDeviceID.Text = row.Cells["deviceID"].Value.ToString();
+                txtWaktu.Text = row.Cells["Waktu"].Value.ToString();
+            }
+        }
+    }
+}
+
+
 
