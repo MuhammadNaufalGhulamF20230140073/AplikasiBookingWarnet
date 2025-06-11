@@ -25,6 +25,7 @@
             this.btnDeleteUser = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnImport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,9 +100,20 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Password";
             // 
+            // btnImport
+            // 
+            this.btnImport.Location = new System.Drawing.Point(388, 30);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(75, 23);
+            this.btnImport.TabIndex = 8;
+            this.btnImport.Text = "Import";
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
             // FormKontrolUser
             // 
             this.ClientSize = new System.Drawing.Size(484, 311);
+            this.Controls.Add(this.btnImport);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDeleteUser);
@@ -129,5 +141,6 @@
         private System.Windows.Forms.Button btnDeleteUser;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnImport;
     }
 }
