@@ -9,7 +9,7 @@ namespace WarnetPABD
 {
     public partial class PreviewAkun : Form
     {
-        private string connectionString = @"Server=DESKTOP-4CQ6R6H\SYAFITODENOVA32; Database=WarnetDB; Integrated Security=True;";
+        string connectionString = @"Server=DESKTOP-4D54309; Database=WarnetDB; Integrated Security=True;";
         private DataTable importedTable;
 
         public PreviewAkun(string filePath)

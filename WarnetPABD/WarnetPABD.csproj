@@ -199,6 +199,12 @@
     <Compile Include="PreviewPembayaran.Designer.cs">
       <DependentUpon>PreviewPembayaran.cs</DependentUpon>
     </Compile>
+    <Compile Include="Priview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Priview.Designer.cs">
+      <DependentUpon>Priview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportPembayaran.cs">
