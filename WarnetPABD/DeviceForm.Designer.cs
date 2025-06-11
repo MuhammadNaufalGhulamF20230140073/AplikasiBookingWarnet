@@ -41,6 +41,7 @@
             this.btnUpdateDevice = new System.Windows.Forms.Button();
             this.btnDeleteDevice = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDevices)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,7 +68,7 @@
             this.lblSpek.AutoSize = true;
             this.lblSpek.Location = new System.Drawing.Point(30, 50);
             this.lblSpek.Name = "lblSpek";
-            this.lblSpek.Size = new System.Drawing.Size(39, 13);
+            this.lblSpek.Size = new System.Drawing.Size(35, 13);
             this.lblSpek.TabIndex = 2;
             this.lblSpek.Text = "Spek:";
             // 
@@ -76,7 +77,7 @@
             this.lblLokasiPC.AutoSize = true;
             this.lblLokasiPC.Location = new System.Drawing.Point(30, 80);
             this.lblLokasiPC.Name = "lblLokasiPC";
-            this.lblLokasiPC.Size = new System.Drawing.Size(59, 13);
+            this.lblLokasiPC.Size = new System.Drawing.Size(58, 13);
             this.lblLokasiPC.TabIndex = 3;
             this.lblLokasiPC.Text = "Lokasi PC:";
             // 
@@ -85,7 +86,7 @@
             this.lblStatus.AutoSize = true;
             this.lblStatus.Location = new System.Drawing.Point(30, 110);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(41, 13);
+            this.lblStatus.Size = new System.Drawing.Size(40, 13);
             this.lblStatus.TabIndex = 4;
             this.lblStatus.Text = "Status:";
             // 
@@ -164,9 +165,20 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(466, 370);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "IMPORT";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnImport_Click);
+            // 
             // DeviceForm
             // 
             this.ClientSize = new System.Drawing.Size(700, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnDeleteDevice);
             this.Controls.Add(this.btnUpdateDevice);
@@ -185,6 +197,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDevices)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
+
+        private System.Windows.Forms.Button button1;
     }
 }

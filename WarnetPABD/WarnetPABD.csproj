@@ -193,6 +193,12 @@
     <Compile Include="PreviewAkun.Designer.cs">
       <DependentUpon>PreviewAkun.cs</DependentUpon>
     </Compile>
+    <Compile Include="PreviewDevice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewDevice.Designer.cs">
+      <DependentUpon>PreviewDevice.cs</DependentUpon>
+    </Compile>
     <Compile Include="PreviewPembayaran.cs">
       <SubType>Form</SubType>
     </Compile>

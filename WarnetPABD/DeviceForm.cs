@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System;
+using System.Data;
+using System.Data.OleDb;
+using System.Data.SqlClient;
+using System.Windows.Forms;
+
 
 namespace WarnetPABD
 {
@@ -183,6 +189,24 @@ namespace WarnetPABD
         {
             LoadDeviceData(); // Memuat ulang data perangkat
             ClearForm(); // Mengosongkan form
+        }
+
+
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
+                PreviewDevice previewForm = new PreviewDevice(filePath);
+                previewForm.ShowDialog();
+
+                // Setelah form preview ditutup, refresh DataGridView
+                LoadDeviceData();
+            }
         }
 
         // Fungsi untuk mengosongkan form
