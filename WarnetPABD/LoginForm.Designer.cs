@@ -6,7 +6,6 @@
         private System.Windows.Forms.Button btnLoginUser;
         private System.Windows.Forms.Button btnLoginAdmin;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label lblSelectLogin;
 
         protected override void Dispose(bool disposing)
         {
@@ -22,7 +21,9 @@
             this.btnLoginUser = new System.Windows.Forms.Button();
             this.btnLoginAdmin = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.lblSelectLogin = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLoginUser
@@ -55,27 +56,42 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // lblSelectLogin
+            // panel1
             // 
-            this.lblSelectLogin.AutoSize = true;
-            this.lblSelectLogin.Location = new System.Drawing.Point(120, 20);
-            this.lblSelectLogin.Name = "lblSelectLogin";
-            this.lblSelectLogin.Size = new System.Drawing.Size(108, 13);
-            this.lblSelectLogin.TabIndex = 3;
-            this.lblSelectLogin.Text = "LOGIN";
+            this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Location = new System.Drawing.Point(69, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 41);
+            this.panel1.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Showcard Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(187, 23);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "SELAMAT DATANG";
             // 
             // LoginForm
             // 
-            this.ClientSize = new System.Drawing.Size(320, 180);
-            this.Controls.Add(this.lblSelectLogin);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClientSize = new System.Drawing.Size(364, 221);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnLoginAdmin);
             this.Controls.Add(this.btnLoginUser);
             this.Controls.Add(this.btnCancel);
             this.Name = "LoginForm";
             this.Text = "Login Form";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
+
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
     }
 }

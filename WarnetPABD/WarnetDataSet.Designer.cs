@@ -285,7 +285,7 @@ namespace WarnetPABD {
             
             private global::System.Data.DataColumn columnTanggalBayar;
             
-            private global::System.Data.DataColumn columnDurasi;
+            private global::System.Data.DataColumn columnTotalDurasi;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -346,9 +346,9 @@ namespace WarnetPABD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn DurasiColumn {
+            public global::System.Data.DataColumn TotalDurasiColumn {
                 get {
-                    return this.columnDurasi;
+                    return this.columnTotalDurasi;
                 }
             }
             
@@ -389,13 +389,13 @@ namespace WarnetPABD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public DataTable1Row AddDataTable1Row(string Username, int TotalHarga, System.DateTime TanggalBayar, int Durasi) {
+            public DataTable1Row AddDataTable1Row(string Username, int TotalHarga, System.DateTime TanggalBayar, int TotalDurasi) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Username,
                         TotalHarga,
                         TanggalBayar,
-                        Durasi};
+                        TotalDurasi};
                 rowDataTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable1Row);
                 return rowDataTable1Row;
@@ -421,7 +421,7 @@ namespace WarnetPABD {
                 this.columnUsername = base.Columns["Username"];
                 this.columnTotalHarga = base.Columns["TotalHarga"];
                 this.columnTanggalBayar = base.Columns["TanggalBayar"];
-                this.columnDurasi = base.Columns["Durasi"];
+                this.columnTotalDurasi = base.Columns["TotalDurasi"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -433,11 +433,11 @@ namespace WarnetPABD {
                 base.Columns.Add(this.columnTotalHarga);
                 this.columnTanggalBayar = new global::System.Data.DataColumn("TanggalBayar", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTanggalBayar);
-                this.columnDurasi = new global::System.Data.DataColumn("Durasi", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDurasi);
+                this.columnTotalDurasi = new global::System.Data.DataColumn("TotalDurasi", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalDurasi);
                 this.columnUsername.AllowDBNull = false;
                 this.columnUsername.MaxLength = 50;
-                this.columnDurasi.AllowDBNull = false;
+                this.columnTotalDurasi.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -623,12 +623,17 @@ namespace WarnetPABD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int Durasi {
+            public int TotalDurasi {
                 get {
-                    return ((int)(this[this.tableDataTable1.DurasiColumn]));
+                    try {
+                        return ((int)(this[this.tableDataTable1.TotalDurasiColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalDurasi\' in table \'DataTable1\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableDataTable1.DurasiColumn] = value;
+                    this[this.tableDataTable1.TotalDurasiColumn] = value;
                 }
             }
             
@@ -654,6 +659,18 @@ namespace WarnetPABD {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetTanggalBayarNull() {
                 this[this.tableDataTable1.TanggalBayarColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTotalDurasiNull() {
+                return this.IsNull(this.tableDataTable1.TotalDurasiColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTotalDurasiNull() {
+                this[this.tableDataTable1.TotalDurasiColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -819,7 +836,7 @@ namespace WarnetPABD.WarnetDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("Username", "Username");
             tableMapping.ColumnMappings.Add("TotalHarga", "TotalHarga");
             tableMapping.ColumnMappings.Add("TanggalBayar", "TanggalBayar");
-            tableMapping.ColumnMappings.Add("Durasi", "Durasi");
+            tableMapping.ColumnMappings.Add("TotalDurasi", "TotalDurasi");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -836,9 +853,11 @@ namespace WarnetPABD.WarnetDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        b.Username, b.Durasi, p.TotalHarga, p.TanggalBayar\r\nFROM           " +
-                " Booking AS b INNER JOIN\r\n                         Pembayaran AS p ON b.BookingI" +
-                "D = p.BookingID\r\nORDER BY p.TanggalBayar DESC";
+            this._commandCollection[0].CommandText = @"SELECT        b.Username, SUM(b.Durasi) AS TotalDurasi, SUM(p.TotalHarga) AS TotalHarga, p.TanggalBayar
+FROM            Booking AS b INNER JOIN
+                         Pembayaran AS p ON b.BookingID = p.BookingID
+GROUP BY b.Username, p.TanggalBayar
+ORDER BY p.TanggalBayar DESC";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

@@ -7,9 +7,14 @@ namespace WarnetPABD
 {
     public partial class LoginDetailsAdmin : Form
     {
+        Koneksi kn = new Koneksi(); //memanggil class koneksi
+        string strKonek = "";
         public LoginDetailsAdmin()
         {
             InitializeComponent();
+            strKonek = kn.connectionString();
+
+
         }
 
         // Event handler untuk tombol Login (untuk Admin)
@@ -19,8 +24,7 @@ namespace WarnetPABD
             string password = txtPassword.Text;
 
             // Koneksi ke database
-            string connectionString = @"Server=DESKTOP-4D54309; Database=WarnetDB; Integrated Security=True;";
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(strKonek))
             {
                 conn.Open();
                 string query = "SELECT * FROM Admin WHERE Username = @username AND Password = @password";

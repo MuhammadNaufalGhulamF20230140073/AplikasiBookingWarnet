@@ -8,11 +8,14 @@ namespace WarnetPABD
     {
         private int bookingID;
         private int totalHarga;
+        Koneksi kn = new Koneksi(); //memanggil class koneksi
+        string strKonek = "";
 
         // Konstruktor yang menerima BookingID dan TotalHarga dari BookingUser
         public PembayaranForm(int bookingID, int totalHarga)
         {
             InitializeComponent();
+            strKonek = kn.connectionString();
             this.bookingID = bookingID;
             this.totalHarga = totalHarga;
 
@@ -28,16 +31,15 @@ namespace WarnetPABD
         private void btnPay_Click(object sender, EventArgs e)
         {
             string paymentMethod = "CASH";  // Asumsi metode pembayaran adalah CASH
-            string connectionString = @"Server=DESKTOP-4D54309; Database=WarnetDB; Integrated Security=True;";
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(strKonek))
                 {
                     conn.Open();
 
                     // Memasukkan data pembayaran ke dalam tabel Pembayaran
-                    string query = "UPDATE Pembayaran SET MetodePembayaran = @paymentMethod, StatusPembayaran = 'LUNAS' WHERE BookingID = @bookingID";
+                    string query = "UPDATE Pembayaran SET MetodePembayaran = @paymentMethod, StatusPembayaran = 'PENDING' WHERE BookingID = @bookingID";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@paymentMethod", paymentMethod);  // Metode pembayaran diatur ke 'CASH'
                     cmd.Parameters.AddWithValue("@bookingID", bookingID);
@@ -47,10 +49,15 @@ namespace WarnetPABD
 
                     if (rowsAffected > 0)
                     {
-                        // Tampilkan pesan bahwa pembayaran telah berhasil
                         MessageBox.Show("Silahkan bayar ke operator. Menyebutkan username: " + txtUsername.Text);
-                        this.Close();  // Menutup form pembayaran setelah berhasil
+
+                        // Tampilkan LoginForm
+                        LoginForm loginForm = new LoginForm();
+                        loginForm.Show();
+
+                        this.Close(); // Tutup form pembayaran
                     }
+
                     else
                     {
                         MessageBox.Show("Booking ID tidak ditemukan.");
@@ -66,10 +73,9 @@ namespace WarnetPABD
         // Fungsi untuk memuat data pengguna berdasarkan BookingID
         private void LoadUserData()
         {
-            string connectionString = @"Server=DESKTOP-4D54309; Database=WarnetDB; Integrated Security=True;";
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(strKonek))
                 {
                     conn.Open();
 

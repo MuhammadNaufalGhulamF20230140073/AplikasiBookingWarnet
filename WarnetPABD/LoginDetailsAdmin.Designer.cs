@@ -27,7 +27,6 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-
             this.SuspendLayout();
             // 
             // lblUsername
@@ -85,6 +84,7 @@
             // 
             // LoginDetailsAdmin
             // 
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(380, 240);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnLogin);
@@ -96,6 +96,7 @@
             this.Text = "Admin Login";
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
     }
 }

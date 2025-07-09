@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace WarnetPABD
 {
     public partial class DashboardAdmin : Form
     {
+        Koneksi kn = new Koneksi(); //memanggil class koneksi
+        string strKonek = "";
+
         public DashboardAdmin()
         {
             InitializeComponent();
+            strKonek = kn.connectionString();
+
         }
 
         // Event handler saat form dimuat
@@ -57,5 +63,30 @@ namespace WarnetPABD
             FormKontrolUser kontrolUserForm = new FormKontrolUser();
             kontrolUserForm.Show();
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnTesKoneksi_Click(object sender, EventArgs e)
+        {
+            Koneksi kn = new Koneksi();
+            string strKonek = kn.connectionString();
+
+            using (SqlConnection conn = new SqlConnection(strKonek))
+            {
+                try
+                {
+                    conn.Open();
+                    MessageBox.Show("Status: Tersambung ke database!", "Tes Koneksi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Gagal terhubung: {ex.Message}", "Tes Koneksi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
     }
 }

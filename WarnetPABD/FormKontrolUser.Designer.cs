@@ -54,7 +54,7 @@
             // 
             // btnAddUser
             // 
-            this.btnAddUser.Location = new System.Drawing.Point(12, 120);
+            this.btnAddUser.Location = new System.Drawing.Point(33, 114);
             this.btnAddUser.Name = "btnAddUser";
             this.btnAddUser.Size = new System.Drawing.Size(100, 30);
             this.btnAddUser.TabIndex = 3;
@@ -64,7 +64,7 @@
             // 
             // btnUpdateUser
             // 
-            this.btnUpdateUser.Location = new System.Drawing.Point(150, 120);
+            this.btnUpdateUser.Location = new System.Drawing.Point(150, 114);
             this.btnUpdateUser.Name = "btnUpdateUser";
             this.btnUpdateUser.Size = new System.Drawing.Size(100, 30);
             this.btnUpdateUser.TabIndex = 4;
@@ -74,7 +74,7 @@
             // 
             // btnDeleteUser
             // 
-            this.btnDeleteUser.Location = new System.Drawing.Point(300, 120);
+            this.btnDeleteUser.Location = new System.Drawing.Point(275, 114);
             this.btnDeleteUser.Name = "btnDeleteUser";
             this.btnDeleteUser.Size = new System.Drawing.Size(100, 30);
             this.btnDeleteUser.TabIndex = 5;
@@ -102,16 +102,18 @@
             // 
             // btnImport
             // 
+            this.btnImport.BackColor = System.Drawing.Color.DarkOrange;
             this.btnImport.Location = new System.Drawing.Point(388, 30);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(75, 23);
             this.btnImport.TabIndex = 8;
             this.btnImport.Text = "Import";
-            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.UseVisualStyleBackColor = false;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // FormKontrolUser
             // 
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(484, 311);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.label2);

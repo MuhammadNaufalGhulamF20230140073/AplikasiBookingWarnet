@@ -9,12 +9,15 @@ namespace WarnetPABD
 {
     public partial class PreviewDevice : Form
     {
-        string connectionString = @"Server=DESKTOP-4D54309; Database=WarnetDB; Integrated Security=True;";
+        Koneksi kn = new Koneksi(); //memanggil class koneksi
+        string strKonek = "";
         private DataTable importedTable;
+
 
         public PreviewDevice(string filePath)
         {
             InitializeComponent();
+            strKonek = kn.connectionString();
             LoadExcelData(filePath);
         }
 
@@ -46,7 +49,7 @@ namespace WarnetPABD
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(strKonek))
                 {
                     conn.Open();
 

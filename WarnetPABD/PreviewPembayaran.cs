@@ -7,12 +7,15 @@ namespace WarnetPABD
 {
     public partial class PreviewPembayaran : Form
     {
+        Koneksi kn = new Koneksi(); //memanggil class koneksi
+        string strKonek = "";
         private DataTable _excelData;
 
         // Constructor menerima DataTable untuk menampilkan data
         public PreviewPembayaran(DataTable excelData)
         {
             InitializeComponent();
+            strKonek = kn.connectionString();
             _excelData = excelData;
 
             // Set the DataTable to DataGridView
@@ -24,8 +27,7 @@ namespace WarnetPABD
         {
             try
             {
-                string connectionString = @"Server=DESKTOP-4D54309; Database=WarnetDB; Integrated Security=True;";
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(strKonek))
                 {
                     conn.Open();
 

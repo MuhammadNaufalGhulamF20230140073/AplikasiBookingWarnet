@@ -6,9 +6,13 @@ namespace WarnetPABD
 {
     public partial class LoginDetailsUser : Form
     {
+        Koneksi kn = new Koneksi(); //memanggil class koneksi
+        string strKonek = "";
+
         public LoginDetailsUser()
         {
             InitializeComponent();
+            strKonek = kn.connectionString(); // Mendapatkan string koneksi dari class Koneksi
         }
 
         // Event handler untuk tombol Login (untuk User)
@@ -18,8 +22,7 @@ namespace WarnetPABD
             string password = txtPassword.Text;  // Ambil password dari TextBox
 
             // Koneksi ke database
-            string connectionString = @"Server=DESKTOP-4D54309; Database=WarnetDB; Integrated Security=True;";
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(strKonek))
             {
                 conn.Open();
                 string query = "SELECT * FROM Pengguna WHERE Username = @username AND Password = @password";

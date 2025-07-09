@@ -136,6 +136,7 @@
             // 
             // PembayaranForm
             // 
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(400, 250);
             this.Controls.Add(this.btnPay);
             this.Controls.Add(this.txtTotalHarga);

@@ -1,6 +1,6 @@
 ﻿namespace WarnetPABD
 {
-    partial class Priview
+    partial class PreviewBooking
     {
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.DataGridView dataGridView1;

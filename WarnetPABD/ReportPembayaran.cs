@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Windows.Forms;
 using Microsoft.Reporting.WinForms;
 
@@ -8,9 +9,12 @@ namespace WarnetPABD
 {
     public partial class ReportPembayaran : Form
     {
+        Koneksi kn = new Koneksi(); //memanggil class koneksi
+        string strKonek = "";
         public ReportPembayaran()  // No parameters needed anymore
         {
             InitializeComponent();
+            strKonek = kn.connectionString();
         }
 
         // Form Load Event
@@ -22,22 +26,25 @@ namespace WarnetPABD
         // Function to load the report
         private void LoadReport()
         {
-            string connectionString = @"Server=DESKTOP-4D54309; Database=WarnetDB; Integrated Security=True;";
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(strKonek))
                 {
                     conn.Open();
 
                     // Updated query to calculate TotalHarga based on Durasi
                     string query = "SELECT b.Username, " +
-                                   "SUM(b.Durasi) AS Durasi, " +
-                                   "SUM(b.Durasi * 10000) AS TotalHarga, " +  // Multiply Durasi by price per hour (10,000)
-                                   "p.TanggalBayar " +
-                                   "FROM Booking AS b " +
-                                   "INNER JOIN Pembayaran AS p ON b.BookingID = p.BookingID " +
-                                   "GROUP BY b.Username, p.TanggalBayar " +
-                                   "ORDER BY p.TanggalBayar DESC";
+       "SUM(b.Durasi) AS TotalDurasi, " +
+       "SUM(b.Durasi * 10000) AS TotalHarga, " +
+       "MAX(p.TanggalBayar) AS TanggalBayar " +
+       "FROM Booking AS b " +
+       "INNER JOIN Pembayaran AS p ON b.BookingID = p.BookingID " +
+       "WHERE p.StatusPembayaran = 'LUNAS' " +  // Hanya yang LUNAS
+       "GROUP BY b.Username " +
+       "ORDER BY b.Username";
+
+
+
 
                     // Prepare the SQL command and fetch the data
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(query, conn);
@@ -56,8 +63,7 @@ namespace WarnetPABD
                     reportViewer1.LocalReport.DataSources.Add(rds);
 
                     // Set the report path
-                    string reportPath = @"C:\Users\n\source\repos\WarnetPABD\WarnetPABD\PembayaranReport.rdlc";
-                    reportViewer1.LocalReport.ReportPath = reportPath;
+                    string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PembayaranReport.rdlc");
 
                     // Refresh the report to display data
                     reportViewer1.RefreshReport();

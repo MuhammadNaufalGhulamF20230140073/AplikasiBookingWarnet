@@ -33,5 +33,10 @@ namespace WarnetPABD
         {
             Application.Exit();  // Menutup aplikasi jika Cancel ditekan
         }
+
+        private void lblSelectLogin_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

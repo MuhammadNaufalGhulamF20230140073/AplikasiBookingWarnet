@@ -1,4 +1,6 @@
-﻿namespace WarnetPABD
+﻿using System.Windows.Forms;
+
+namespace WarnetPABD
 {
     partial class BookingUser
     {
@@ -28,6 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BookingUser));
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.cmbDevices = new System.Windows.Forms.ComboBox();
             this.txtDuration = new System.Windows.Forms.TextBox();
@@ -37,13 +40,15 @@
             this.lblDevice = new System.Windows.Forms.Label();
             this.lblDuration = new System.Windows.Forms.Label();
             this.lblBookingID = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtUsername
             // 
             this.txtUsername.Location = new System.Drawing.Point(150, 30);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(200, 20);
+            this.txtUsername.Size = new System.Drawing.Size(144, 20);
             this.txtUsername.TabIndex = 1;
             // 
             // cmbDevices
@@ -51,14 +56,14 @@
             this.cmbDevices.FormattingEnabled = true;
             this.cmbDevices.Location = new System.Drawing.Point(150, 70);
             this.cmbDevices.Name = "cmbDevices";
-            this.cmbDevices.Size = new System.Drawing.Size(200, 21);
+            this.cmbDevices.Size = new System.Drawing.Size(144, 21);
             this.cmbDevices.TabIndex = 3;
             // 
             // txtDuration
             // 
             this.txtDuration.Location = new System.Drawing.Point(150, 110);
             this.txtDuration.Name = "txtDuration";
-            this.txtDuration.Size = new System.Drawing.Size(200, 20);
+            this.txtDuration.Size = new System.Drawing.Size(32, 20);
             this.txtDuration.TabIndex = 5;
             // 
             // txtBookingID
@@ -66,16 +71,16 @@
             this.txtBookingID.Enabled = false;
             this.txtBookingID.Location = new System.Drawing.Point(150, 150);
             this.txtBookingID.Name = "txtBookingID";
-            this.txtBookingID.Size = new System.Drawing.Size(200, 20);
+            this.txtBookingID.Size = new System.Drawing.Size(144, 20);
             this.txtBookingID.TabIndex = 7;
             // 
             // btnBookDevice
             // 
             this.btnBookDevice.Location = new System.Drawing.Point(150, 190);
             this.btnBookDevice.Name = "btnBookDevice";
-            this.btnBookDevice.Size = new System.Drawing.Size(200, 30);
+            this.btnBookDevice.Size = new System.Drawing.Size(92, 30);
             this.btnBookDevice.TabIndex = 8;
-            this.btnBookDevice.Text = "Book Device";
+            this.btnBookDevice.Text = "Pesan";
             this.btnBookDevice.UseVisualStyleBackColor = true;
             this.btnBookDevice.Click += new System.EventHandler(this.btnBookDevice_Click);
             // 
@@ -105,6 +110,7 @@
             this.lblDuration.Size = new System.Drawing.Size(40, 13);
             this.lblDuration.TabIndex = 4;
             this.lblDuration.Text = "Durasi:";
+            this.lblDuration.Click += new System.EventHandler(this.lblDuration_Click);
             // 
             // lblBookingID
             // 
@@ -115,9 +121,21 @@
             this.lblBookingID.TabIndex = 6;
             this.lblBookingID.Text = "Booking ID:";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(356, 30);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(389, 190);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // BookingUser
             // 
-            this.ClientSize = new System.Drawing.Size(500, 250);
+            this.ClientSize = new System.Drawing.Size(757, 250);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnBookDevice);
             this.Controls.Add(this.txtBookingID);
             this.Controls.Add(this.lblBookingID);
@@ -130,6 +148,7 @@
             this.Name = "BookingUser";
             this.Text = "Booking User";
             this.Load += new System.EventHandler(this.BookingUser_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,5 +165,6 @@
         private System.Windows.Forms.Label lblDevice;
         private System.Windows.Forms.Label lblDuration;
         private System.Windows.Forms.Label lblBookingID;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

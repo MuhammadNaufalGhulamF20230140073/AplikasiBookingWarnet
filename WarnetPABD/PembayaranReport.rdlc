@@ -64,7 +64,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!Durasi.Value)</Value>
+                              <Value>=Fields!TotalDurasi.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -124,7 +124,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TanggalBayar.Value</Value>
+                              <Value>=Format(Fields!TanggalBayar.Value, "dd MMMM yyyy")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -356,8 +356,8 @@
           <DataField>TanggalBayar</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="Durasi">
-          <DataField>Durasi</DataField>
+        <Field Name="TotalDurasi">
+          <DataField>TotalDurasi</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>

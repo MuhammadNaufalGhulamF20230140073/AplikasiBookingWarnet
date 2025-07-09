@@ -22,7 +22,10 @@
         private System.Windows.Forms.TextBox txtTanggalBayar;
         private System.Windows.Forms.Button btnShowReport;
         private System.Windows.Forms.Button btnToggle; // The toggle button to enable/disable Username and Add button
-        private System.Windows.Forms.Button btnImport; // The Import button to open the PreviewPembayaran form
+        private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Label lblDeviceID;
+        private System.Windows.Forms.TextBox txtDeviceID;
+        // The Import button to open the PreviewPembayaran form
 
         protected override void Dispose(bool disposing)
         {
@@ -55,6 +58,10 @@
             this.btnShowReport = new System.Windows.Forms.Button();
             this.btnToggle = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
+            this.lblDeviceID = new System.Windows.Forms.Label();
+            this.txtDeviceID = new System.Windows.Forms.TextBox();
+            this.btnLihatChart = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPembayaran)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,7 +181,7 @@
             // 
             // btnUpdatePembayaran
             // 
-            this.btnUpdatePembayaran.Location = new System.Drawing.Point(15, 420);
+            this.btnUpdatePembayaran.Location = new System.Drawing.Point(15, 433);
             this.btnUpdatePembayaran.Name = "btnUpdatePembayaran";
             this.btnUpdatePembayaran.Size = new System.Drawing.Size(115, 33);
             this.btnUpdatePembayaran.TabIndex = 16;
@@ -184,7 +191,7 @@
             // 
             // btnDeletePembayaran
             // 
-            this.btnDeletePembayaran.Location = new System.Drawing.Point(208, 420);
+            this.btnDeletePembayaran.Location = new System.Drawing.Point(158, 433);
             this.btnDeletePembayaran.Name = "btnDeletePembayaran";
             this.btnDeletePembayaran.Size = new System.Drawing.Size(112, 33);
             this.btnDeletePembayaran.TabIndex = 17;
@@ -194,67 +201,84 @@
             // 
             // lblTanggalBayar
             // 
-            this.lblTanggalBayar.Location = new System.Drawing.Point(0, 0);
+            this.lblTanggalBayar.AutoSize = true;
+            this.lblTanggalBayar.Location = new System.Drawing.Point(12, 400);
             this.lblTanggalBayar.Name = "lblTanggalBayar";
-            this.lblTanggalBayar.Size = new System.Drawing.Size(100, 23);
+            this.lblTanggalBayar.Size = new System.Drawing.Size(79, 13);
             this.lblTanggalBayar.TabIndex = 13;
+            this.lblTanggalBayar.Text = "Tanggal Bayar:";
             // 
             // txtTanggalBayar
             // 
-            this.txtTanggalBayar.Location = new System.Drawing.Point(0, 0);
+            this.txtTanggalBayar.Location = new System.Drawing.Point(120, 397);
             this.txtTanggalBayar.Name = "txtTanggalBayar";
-            this.txtTanggalBayar.Size = new System.Drawing.Size(100, 20);
+            this.txtTanggalBayar.Size = new System.Drawing.Size(200, 20);
             this.txtTanggalBayar.TabIndex = 14;
             // 
             // btnShowReport
             // 
+            this.btnShowReport.BackColor = System.Drawing.Color.IndianRed;
             this.btnShowReport.Location = new System.Drawing.Point(355, 277);
             this.btnShowReport.Name = "btnShowReport";
             this.btnShowReport.Size = new System.Drawing.Size(166, 34);
             this.btnShowReport.TabIndex = 18;
             this.btnShowReport.Text = "LIHAT LAPORAN(Report)";
-            this.btnShowReport.UseVisualStyleBackColor = true;
+            this.btnShowReport.UseVisualStyleBackColor = false;
             this.btnShowReport.Click += new System.EventHandler(this.btnShowReport_Click);
             // 
-
-
-
-            // lblTanggalBayar
-            this.lblTanggalBayar.AutoSize = true;
-            this.lblTanggalBayar.Location = new System.Drawing.Point(12, 400); // posisi di bawah metode pembayaran
-            this.lblTanggalBayar.Name = "lblTanggalBayar";
-            this.lblTanggalBayar.Size = new System.Drawing.Size(80, 13);
-            this.lblTanggalBayar.TabIndex = 13;
-            this.lblTanggalBayar.Text = "Tanggal Bayar:";
-
-            // txtTanggalBayar
-            this.txtTanggalBayar.Location = new System.Drawing.Point(120, 397); // sejajar dengan label
-            this.txtTanggalBayar.Name = "txtTanggalBayar";
-            this.txtTanggalBayar.Size = new System.Drawing.Size(200, 20);
-            this.txtTanggalBayar.TabIndex = 14;
-
             // btnToggle
             // 
+            this.btnToggle.BackColor = System.Drawing.SystemColors.GrayText;
             this.btnToggle.Location = new System.Drawing.Point(355, 218);
             this.btnToggle.Name = "btnToggle";
             this.btnToggle.Size = new System.Drawing.Size(166, 36);
             this.btnToggle.TabIndex = 19;
             this.btnToggle.Text = "AKTIFKAN KOLOM USERNAME";
-            this.btnToggle.UseVisualStyleBackColor = true;
+            this.btnToggle.UseVisualStyleBackColor = false;
             this.btnToggle.Click += new System.EventHandler(this.btnToggle_Click);
             // 
             // btnImport
             // 
-            this.btnImport.Location = new System.Drawing.Point(355, 335);
+            this.btnImport.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnImport.Location = new System.Drawing.Point(355, 328);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(166, 36);
+            this.btnImport.Size = new System.Drawing.Size(166, 30);
             this.btnImport.TabIndex = 20;
             this.btnImport.Text = "Import";
-            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.UseVisualStyleBackColor = false;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
+            // lblDeviceID
+            // 
+            this.lblDeviceID.AutoSize = true;
+            this.lblDeviceID.Location = new System.Drawing.Point(12, 310);
+            this.lblDeviceID.Name = "lblDeviceID";
+            this.lblDeviceID.Size = new System.Drawing.Size(58, 13);
+            this.lblDeviceID.TabIndex = 7;
+            this.lblDeviceID.Text = "Device ID:";
+            // 
+            // txtDeviceID
+            // 
+            this.txtDeviceID.Location = new System.Drawing.Point(120, 307);
+            this.txtDeviceID.Name = "txtDeviceID";
+            this.txtDeviceID.ReadOnly = true;
+            this.txtDeviceID.Size = new System.Drawing.Size(200, 20);
+            this.txtDeviceID.TabIndex = 8;
+            // 
+            // btnLihatChart
+            // 
+            this.btnLihatChart.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnLihatChart.Location = new System.Drawing.Point(355, 370);
+            this.btnLihatChart.Name = "btnLihatChart";
+            this.btnLihatChart.Size = new System.Drawing.Size(166, 29);
+            this.btnLihatChart.TabIndex = 21;
+            this.btnLihatChart.Text = "Grapik";
+            this.btnLihatChart.UseVisualStyleBackColor = false;
+            this.btnLihatChart.Click += new System.EventHandler(this.btnLihatChart_Click);
             // 
             // FormPembayaranAdmin
             // 
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 500);
             this.Controls.Add(this.dgvPembayaran);
             this.Controls.Add(this.lblBookingID);
@@ -276,6 +300,9 @@
             this.Controls.Add(this.btnShowReport);
             this.Controls.Add(this.btnToggle);
             this.Controls.Add(this.btnImport);
+            this.Controls.Add(this.lblDeviceID);
+            this.Controls.Add(this.txtDeviceID);
+            this.Controls.Add(this.btnLihatChart);
             this.Name = "FormPembayaranAdmin";
             this.Text = "Data Pembayaran";
             this.Load += new System.EventHandler(this.FormPembayaranAdmin_Load);
@@ -284,5 +311,8 @@
             this.PerformLayout();
 
         }
+
+        private System.Windows.Forms.Button btnLihatChart;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

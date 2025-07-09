@@ -80,6 +80,7 @@
             // 
             // LoginDetailsUser
             // 
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(500, 250);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

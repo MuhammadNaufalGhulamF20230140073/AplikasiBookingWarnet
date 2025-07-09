@@ -14,8 +14,9 @@
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnRefresh;  // Tombol Refresh
-        private System.Windows.Forms.DataGridView dgvBookings;  // DataGridView untuk menampilkan data booking
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.DataGridView dgvBookings;
+        private System.Windows.Forms.Button btnImport;
 
         protected override void Dispose(bool disposing)
         {
@@ -41,8 +42,6 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.dgvBookings = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookings)).BeginInit();
             this.SuspendLayout();
@@ -55,6 +54,7 @@
             this.lblBookingID.Size = new System.Drawing.Size(63, 13);
             this.lblBookingID.TabIndex = 0;
             this.lblBookingID.Text = "Booking ID:";
+            this.lblBookingID.Click += new System.EventHandler(this.lblBookingID_Click);
             // 
             // txtBookingID
             // 
@@ -163,31 +163,12 @@
             this.dgvBookings.TabIndex = 12;
             this.dgvBookings.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBookings_CellClick);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(432, 50);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Report";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(432, 90);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "Export";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.btnExport_Click);
-            // 
             // btnImport
             // 
-            this.btnImport.Location = new System.Drawing.Point(432, 130);
+            this.btnImport.Location = new System.Drawing.Point(442, 30);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(75, 23);
-            this.btnImport.TabIndex = 15;
+            this.btnImport.TabIndex = 13;
             this.btnImport.Text = "Import";
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
@@ -196,8 +177,6 @@
             // 
             this.ClientSize = new System.Drawing.Size(577, 384);
             this.Controls.Add(this.btnImport);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvBookings);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnDelete);
@@ -219,9 +198,5 @@
             this.PerformLayout();
 
         }
-
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnImport;
     }
 }
