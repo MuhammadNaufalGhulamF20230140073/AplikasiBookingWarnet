@@ -92,7 +92,7 @@ namespace WarnetPABD
             string deviceID = cmbDevices.SelectedItem?.ToString();
             if (string.IsNullOrEmpty(deviceID))
             {
-                MessageBox.Show("Pilih perangkat terlebih dahulu!");
+                MessageBox.Show("Error Device Sudah digunakan");
                 return;
             }
 

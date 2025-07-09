@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using ExcelDataReader;
 
+
 namespace WarnetPABD
 {
     public partial class BookingFormAdmin : Form
@@ -14,16 +15,19 @@ namespace WarnetPABD
         Koneksi kn = new Koneksi(); //memanggil class koneksi
         string strKonek = "";
 
+
         public BookingFormAdmin()
         {
             InitializeComponent();
             InitializeCustomComponents();
             strKonek = kn.connectionString();
+
         }
 
         private void BookingFormAdmin_Load(object sender, EventArgs e)
         {
             LoadAllDataWithTime();
+
         }
 
         private void dgvBookings_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -35,6 +39,7 @@ namespace WarnetPABD
                 txtUsername.Text = row.Cells["Username"].Value?.ToString();
                 txtDurasi.Text = row.Cells["Durasi"].Value?.ToString();
 
+                // ISI ComboBox dengan SelectedItem (bukan Text!)
                 string deviceId = row.Cells["DeviceID"].Value?.ToString();
                 if (!string.IsNullOrEmpty(deviceId) && txtDeviceID.Items.Contains(deviceId))
                     txtDeviceID.SelectedItem = deviceId;
@@ -62,52 +67,56 @@ namespace WarnetPABD
                 return;
             }
 
+            // 👉 Validasi apakah device masih tersedia
             using (SqlConnection conn = new SqlConnection(strKonek))
             {
                 conn.Open();
-                SqlTransaction transaction = conn.BeginTransaction();
+
+                string checkDeviceQuery = "SELECT COUNT(*) FROM Device WHERE DeviceID = @DeviceID AND StatusPC = 'Tidak Terpakai'";
+                using (SqlCommand checkCmd = new SqlCommand(checkDeviceQuery, conn))
+                {
+                    checkCmd.Parameters.AddWithValue("@DeviceID", deviceId);
+                    int count = (int)checkCmd.ExecuteScalar();
+
+                    if (count == 0)
+                    {
+                        MessageBox.Show("Device sudah terpakai atau tidak valid. Silakan pilih yang lain.", "Device Tidak Tersedia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                // -- 1. Insert ke Booking, dapatkan BookingID yang baru
+                string queryBooking = "INSERT INTO Booking (Username, DeviceID, Durasi) OUTPUT INSERTED.BookingID VALUES (@Username, @DeviceID, @Durasi)";
+                SqlCommand cmdBooking = new SqlCommand(queryBooking, conn);
+                cmdBooking.Parameters.AddWithValue("@Username", username);
+                cmdBooking.Parameters.AddWithValue("@DeviceID", deviceId);
+                cmdBooking.Parameters.AddWithValue("@Durasi", durasi);
+
+                int newBookingID = 0;
+                try
+                {
+                    newBookingID = (int)cmdBooking.ExecuteScalar();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error saat insert Booking: " + ex.Message);
+                    return;
+                }
+
+                // -- 2. Insert ke Pembayaran
+                int hargaPerJam = 10000;
+                int totalHarga = durasi * hargaPerJam;
+
+                string queryPembayaran = "INSERT INTO Pembayaran (BookingID, MetodePembayaran, StatusPembayaran, TotalHarga) VALUES (@BookingID, @MetodePembayaran, @StatusPembayaran, @TotalHarga)";
+                SqlCommand cmdPembayaran = new SqlCommand(queryPembayaran, conn);
+                cmdPembayaran.Parameters.AddWithValue("@BookingID", newBookingID);
+                cmdPembayaran.Parameters.AddWithValue("@MetodePembayaran", "CASH");
+                cmdPembayaran.Parameters.AddWithValue("@StatusPembayaran", "PENDING");
+                cmdPembayaran.Parameters.AddWithValue("@TotalHarga", totalHarga);
 
                 try
                 {
-                    string checkDeviceQuery = "SELECT COUNT(*) FROM Device WHERE DeviceID = @DeviceID AND StatusPC = 'Tidak Terpakai'";
-                    using (SqlCommand checkCmd = new SqlCommand(checkDeviceQuery, conn, transaction))
-                    {
-                        checkCmd.Parameters.AddWithValue("@DeviceID", deviceId);
-                        int count = (int)checkCmd.ExecuteScalar();
-
-                        if (count == 0)
-                        {
-                            MessageBox.Show("Device sudah terpakai atau tidak valid. Silakan pilih yang lain.", "Device Tidak Tersedia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            transaction.Rollback();
-                            return;
-                        }
-                    }
-
-                    string queryBooking = "INSERT INTO Booking (Username, DeviceID, Durasi) OUTPUT INSERTED.BookingID VALUES (@Username, @DeviceID, @Durasi)";
-                    SqlCommand cmdBooking = new SqlCommand(queryBooking, conn, transaction);
-                    cmdBooking.Parameters.AddWithValue("@Username", username);
-                    cmdBooking.Parameters.AddWithValue("@DeviceID", deviceId);
-                    cmdBooking.Parameters.AddWithValue("@Durasi", durasi);
-
-                    int newBookingID = (int)cmdBooking.ExecuteScalar();
-
-                    int hargaPerJam = 10000;
-                    int totalHarga = durasi * hargaPerJam;
-
-                    string queryPembayaran = "INSERT INTO Pembayaran (BookingID, MetodePembayaran, StatusPembayaran, TotalHarga) VALUES (@BookingID, @MetodePembayaran, @StatusPembayaran, @TotalHarga)";
-                    SqlCommand cmdPembayaran = new SqlCommand(queryPembayaran, conn, transaction);
-                    cmdPembayaran.Parameters.AddWithValue("@BookingID", newBookingID);
-                    cmdPembayaran.Parameters.AddWithValue("@MetodePembayaran", "CASH");
-                    cmdPembayaran.Parameters.AddWithValue("@StatusPembayaran", "PENDING");
-                    cmdPembayaran.Parameters.AddWithValue("@TotalHarga", totalHarga);
                     cmdPembayaran.ExecuteNonQuery();
-
-                    SqlCommand updateDevice = new SqlCommand("UPDATE Device SET StatusPC = 'Terpakai' WHERE DeviceID = @DeviceID", conn, transaction);
-                    updateDevice.Parameters.AddWithValue("@DeviceID", deviceId);
-                    updateDevice.ExecuteNonQuery();
-
-                    transaction.Commit();
-
                     MessageBox.Show("Booking & pembayaran berhasil!\nBookingID: " + newBookingID);
                     LoadBookings();
                     LoadAvailableDevices();
@@ -115,11 +124,15 @@ namespace WarnetPABD
                 }
                 catch (Exception ex)
                 {
-                    transaction.Rollback();
-                    MessageBox.Show("Terjadi kesalahan saat melakukan transaksi: " + ex.Message);
+                    MessageBox.Show("Error saat insert pembayaran: " + ex.Message);
                 }
             }
         }
+
+
+
+
+
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -179,14 +192,14 @@ namespace WarnetPABD
             {
                 string deviceID = "";
 
-                using (SqlConnection conn = new SqlConnection(strKonek))
+                try
                 {
-                    conn.Open();
-                    SqlTransaction transaction = conn.BeginTransaction();
-
-                    try
+                    using (SqlConnection conn = new SqlConnection(strKonek))
                     {
-                        using (SqlCommand getDeviceCmd = new SqlCommand("SELECT DeviceID FROM Booking WHERE BookingID = @BookingID", conn, transaction))
+                        conn.Open();
+
+                        // Ambil DeviceID dulu sebelum hapus
+                        using (SqlCommand getDeviceCmd = new SqlCommand("SELECT DeviceID FROM Booking WHERE BookingID = @BookingID", conn))
                         {
                             getDeviceCmd.Parameters.AddWithValue("@BookingID", bookingID);
                             var result = getDeviceCmd.ExecuteScalar();
@@ -194,21 +207,23 @@ namespace WarnetPABD
                                 deviceID = result.ToString();
                         }
 
-                        SqlCommand cmd = new SqlCommand("sp_HapusBooking", conn, transaction);
+                        // Hapus booking
+                        SqlCommand cmd = new SqlCommand("sp_HapusBooking", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@BookingID", bookingID);
+
                         int rowsAffected = cmd.ExecuteNonQuery();
 
+                        // Update device setelah hapus booking (tidak harus nunggu rowsAffected > 0, tapi lebih aman dicek)
                         if (!string.IsNullOrEmpty(deviceID))
                         {
-                            using (SqlCommand updateDeviceCmd = new SqlCommand("UPDATE Device SET StatusPC = 'Tidak Terpakai' WHERE DeviceID = @DeviceID", conn, transaction))
+                            using (SqlCommand updateDeviceCmd = new SqlCommand(
+                                "UPDATE Device SET StatusPC = 'Tidak Terpakai' WHERE DeviceID = @DeviceID", conn))
                             {
                                 updateDeviceCmd.Parameters.AddWithValue("@DeviceID", deviceID);
                                 updateDeviceCmd.ExecuteNonQuery();
                             }
                         }
-
-                        transaction.Commit();
 
                         if (rowsAffected > 0)
                         {
@@ -223,11 +238,10 @@ namespace WarnetPABD
                             ClearForm();
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        MessageBox.Show("Terjadi kesalahan saat menghapus: " + ex.Message);
-                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
                 }
             }
             else
@@ -240,7 +254,7 @@ namespace WarnetPABD
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = "Excel Files (.xlsx)|.xlsx",
+                Filter = "Excel Files (*.xlsx)|*.xlsx",
                 Title = "Pilih file Excel untuk diimport"
             };
 
@@ -262,11 +276,14 @@ namespace WarnetPABD
                                 }
                             });
 
+                            // Ambil sheet pertama
                             DataTable importedData = result.Tables[0];
 
+                            // Tampilkan preview
                             PreviewBooking previewForm = new PreviewBooking(importedData);
                             previewForm.ShowDialog();
 
+                            // Reload data ke tampilan
                             LoadBookings();
                             LoadAvailableDevices();
                         }
@@ -278,6 +295,7 @@ namespace WarnetPABD
                 }
             }
         }
+
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -357,17 +375,19 @@ namespace WarnetPABD
             }
         }
 
+
         private void LoadAllDataWithTime()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            LoadBookings();
-            LoadAvailableDevices();
+            LoadBookings(); // tidak tampilkan waktu
+            LoadAvailableDevices(); // tidak tampilkan waktu
 
             stopwatch.Stop();
             MessageBox.Show($"Data berhasil dimuat dalam {stopwatch.Elapsed.TotalSeconds:F2} detik.");
         }
+
 
         private void InitializeCustomComponents()
         {
@@ -381,6 +401,9 @@ namespace WarnetPABD
             txtDeviceID.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        private void lblBookingID_Click(object sender, EventArgs e) { }
+        private void lblBookingID_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
